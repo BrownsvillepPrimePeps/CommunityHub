@@ -1,0 +1,899 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Brownsville Prime Peps</title>
+
+    <!-- App Icons -->
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            min-height: 100vh;
+            color: white;
+
+            background:
+                radial-gradient(circle at 50% 0%, #35105f 0%, transparent 35%),
+                radial-gradient(circle at 0% 50%, #210b3c 0%, transparent 35%),
+                radial-gradient(circle at 100% 70%, #2a0b4d 0%, transparent 35%),
+                #05030a;
+
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            width: 600px;
+            height: 600px;
+            background: #8b2cff;
+            opacity: .07;
+            filter: blur(150px);
+            border-radius: 50%;
+            top: -200px;
+            left: 50%;
+            transform: translateX(-50%);
+            pointer-events: none;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 680px;
+            margin: auto;
+            padding: 45px 20px 35px;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* LOGO */
+
+        .logo-wrapper {
+            width: 130px;
+            height: 130px;
+            margin: 0 auto 22px;
+            border-radius: 50%;
+            padding: 4px;
+
+            background: linear-gradient(
+                135deg,
+                #a855f7,
+                #6d28d9,
+                #c084fc
+            );
+
+            box-shadow:
+                0 0 20px rgba(168,85,247,.5),
+                0 0 60px rgba(126,34,206,.25);
+        }
+
+        .logo {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            background: #08050d;
+            display: block;
+        }
+
+        /* BRAND */
+
+        .brand {
+            text-align: center;
+        }
+
+        .brand h1 {
+            font-size: clamp(30px, 7vw, 48px);
+            font-weight: 900;
+            letter-spacing: 2px;
+            line-height: 1;
+            text-transform: uppercase;
+
+            background: linear-gradient(
+                90deg,
+                #ffffff,
+                #d8b4fe,
+                #a855f7,
+                #ffffff
+            );
+
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .brand h2 {
+            margin-top: 7px;
+            font-size: clamp(24px, 6vw, 38px);
+            letter-spacing: 3px;
+            font-weight: 900;
+            color: #a855f7;
+            text-shadow: 0 0 25px rgba(168,85,247,.4);
+        }
+
+        .tagline {
+            margin-top: 18px;
+            font-size: 12px;
+            letter-spacing: 4px;
+            color: #d8b4fe;
+            font-weight: bold;
+        }
+
+        .description {
+            margin: 20px auto 28px;
+            max-width: 500px;
+            color: #b8afc5;
+            line-height: 1.6;
+            font-size: 15px;
+        }
+
+        /* LINKS */
+
+        .links {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        .link-button {
+            width: 100%;
+            min-height: 76px;
+
+            display: flex;
+            align-items: center;
+
+            padding: 13px 18px;
+
+            text-decoration: none;
+            color: white;
+
+            border: 1px solid rgba(168,85,247,.55);
+            border-radius: 18px;
+
+            background:
+                linear-gradient(
+                    100deg,
+                    rgba(168,85,247,.13),
+                    rgba(255,255,255,.025)
+                );
+
+            box-shadow:
+                inset 0 0 25px rgba(168,85,247,.04),
+                0 8px 30px rgba(0,0,0,.25);
+
+            transition:
+                transform .25s ease,
+                border-color .25s ease,
+                box-shadow .25s ease,
+                background .25s ease;
+
+            cursor: pointer;
+        }
+
+        .link-button:hover {
+            transform: translateY(-3px);
+
+            border-color: #b76cff;
+
+            background:
+                linear-gradient(
+                    100deg,
+                    rgba(168,85,247,.25),
+                    rgba(255,255,255,.05)
+                );
+
+            box-shadow:
+                0 0 25px rgba(168,85,247,.25),
+                0 12px 35px rgba(0,0,0,.35);
+        }
+
+        .icon {
+            width: 50px;
+            height: 50px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 14px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    #8b5cf6,
+                    #4c1d95
+                );
+
+            box-shadow:
+                0 0 18px rgba(139,92,246,.25);
+
+            flex-shrink: 0;
+        }
+
+        .icon i {
+            font-size: 24px;
+        }
+
+        .link-text {
+            flex: 1;
+            padding-left: 16px;
+        }
+
+        .link-title {
+            font-size: 16px;
+            font-weight: 800;
+            letter-spacing: .5px;
+        }
+
+        .link-subtitle {
+            margin-top: 5px;
+            color: #a9a0b7;
+            font-size: 13px;
+        }
+
+        .arrow {
+            color: #b76cff;
+            font-size: 18px;
+            padding-left: 10px;
+        }
+
+        /* FEATURED BUTTONS */
+
+        .inventory {
+            border-color: rgba(192,132,252,.8);
+
+            background:
+                linear-gradient(
+                    100deg,
+                    rgba(126,34,206,.3),
+                    rgba(168,85,247,.08)
+                );
+
+            box-shadow:
+                0 0 25px rgba(168,85,247,.12);
+        }
+
+        .inventory .icon {
+            background:
+                linear-gradient(
+                    145deg,
+                    #c084fc,
+                    #7e22ce
+                );
+        }
+
+        .calculator {
+            border-color: rgba(168,85,247,.7);
+        }
+
+        /* DIVIDER */
+
+        .divider {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin: 28px 0 18px;
+
+            color: #806b99;
+            font-size: 11px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .divider::before,
+        .divider::after {
+            content: "";
+            height: 1px;
+            flex: 1;
+
+            background: linear-gradient(
+                90deg,
+                transparent,
+                rgba(168,85,247,.4),
+                transparent
+            );
+        }
+
+        /* SOCIALS */
+
+        .socials {
+            display: flex;
+            justify-content: center;
+            gap: 14px;
+            margin: 25px 0;
+        }
+
+        .social {
+            width: 48px;
+            height: 48px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 50%;
+
+            color: white;
+            text-decoration: none;
+
+            background: rgba(168,85,247,.1);
+            border: 1px solid rgba(168,85,247,.35);
+
+            transition: .25s ease;
+        }
+
+        .social:hover {
+            transform: translateY(-4px) scale(1.05);
+
+            background: rgba(168,85,247,.25);
+
+            box-shadow:
+                0 0 20px rgba(168,85,247,.3);
+        }
+
+        .social i {
+            font-size: 20px;
+        }
+
+        /* FOOTER */
+
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+
+            color: #746b7f;
+            font-size: 11px;
+            line-height: 1.7;
+        }
+
+        .footer strong {
+            color: #a895b8;
+        }
+
+        /* INVENTORY MODAL */
+
+        .modal {
+            position: fixed;
+            inset: 0;
+
+            background: rgba(0,0,0,.92);
+
+            display: none;
+            align-items: center;
+            justify-content: center;
+
+            padding: 20px;
+
+            z-index: 9999;
+
+            backdrop-filter: blur(10px);
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            position: relative;
+
+            max-width: 900px;
+            max-height: 95vh;
+
+            animation: zoomIn .25s ease;
+        }
+
+        .inventory-image {
+            display: block;
+
+            max-width: 100%;
+            max-height: 90vh;
+
+            object-fit: contain;
+
+            border-radius: 12px;
+
+            box-shadow:
+                0 0 50px rgba(168,85,247,.3);
+        }
+
+        .close {
+            position: absolute;
+
+            top: -45px;
+            right: 0;
+
+            width: 38px;
+            height: 38px;
+
+            border-radius: 50%;
+
+            border: 1px solid #a855f7;
+            background: #160a22;
+
+            color: white;
+
+            font-size: 22px;
+
+            cursor: pointer;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        @keyframes zoomIn {
+
+            from {
+                opacity: 0;
+                transform: scale(.92);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+
+        }
+
+        /* MOBILE */
+
+        @media (max-width: 500px) {
+
+            .container {
+                padding: 35px 15px 25px;
+            }
+
+            .logo-wrapper {
+                width: 105px;
+                height: 105px;
+            }
+
+            .link-button {
+                min-height: 70px;
+            }
+
+            .icon {
+                width: 45px;
+                height: 45px;
+            }
+
+            .link-title {
+                font-size: 14px;
+            }
+
+            .link-subtitle {
+                font-size: 12px;
+            }
+
+            .brand h1 {
+                font-size: 29px;
+            }
+
+            .brand h2 {
+                font-size: 25px;
+            }
+
+            .tagline {
+                font-size: 10px;
+                letter-spacing: 3px;
+            }
+
+        }
+
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <!-- LOGO -->
+
+    <div class="logo-wrapper">
+
+        <img
+            src="logo.png"
+            alt="Brownsville Prime Peps Logo"
+            class="logo"
+        >
+
+    </div>
+
+
+    <!-- BRAND -->
+
+    <div class="brand">
+
+        <h1>BROWNSVILLE</h1>
+
+        <h2>PRIME PEPS</h2>
+
+        <div class="tagline">
+            QUALITY • PURITY • RESULTS
+        </div>
+
+        <p class="description">
+            Stay connected with Brownsville Prime Peps.
+            Get the latest updates on inventory, pricing,
+            announcements and our community.
+        </p>
+
+    </div>
+
+
+    <!-- MAIN LINKS -->
+
+    <div class="links">
+
+
+        <!-- WHATSAPP -->
+
+        <a
+            href="https://chat.whatsapp.com/Gmm4ikN9Aw730Y8X8mY9Ee"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="link-button"
+        >
+
+            <div class="icon">
+                <i class="fa-brands fa-whatsapp"></i>
+            </div>
+
+            <div class="link-text">
+
+                <div class="link-title">
+                    JOIN OUR WHATSAPP COMMUNITY
+                </div>
+
+                <div class="link-subtitle">
+                    Stock updates, announcements & community
+                </div>
+
+            </div>
+
+            <div class="arrow">
+                <i class="fa-solid fa-chevron-right"></i>
+            </div>
+
+        </a>
+
+
+        <!-- INVENTORY -->
+
+        <button
+            class="link-button inventory"
+            onclick="openInventory()"
+        >
+
+            <div class="icon">
+                <i class="fa-solid fa-box-open"></i>
+            </div>
+
+            <div class="link-text">
+
+                <div class="link-title">
+                    CURRENT INVENTORY & PRICING
+                </div>
+
+                <div class="link-subtitle">
+                    View current stock & pricing
+                </div>
+
+            </div>
+
+            <div class="arrow">
+                <i class="fa-solid fa-chevron-right"></i>
+            </div>
+
+        </button>
+
+
+        <!-- PEPTIDE CALCULATOR -->
+
+        <a
+            href="https://brownsvillepprimepeps.github.io/BPPCalculator/"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="link-button calculator"
+        >
+
+            <div class="icon">
+                <i class="fa-solid fa-calculator"></i>
+            </div>
+
+            <div class="link-text">
+
+                <div class="link-title">
+                    PEPTIDE CALCULATOR
+                </div>
+
+                <div class="link-subtitle">
+                    Reconstitution & dosage calculator
+                </div>
+
+            </div>
+
+            <div class="arrow">
+                <i class="fa-solid fa-chevron-right"></i>
+            </div>
+
+        </a>
+
+
+        <!-- TIKTOK -->
+
+        <a
+            href="https://www.tiktok.com/@brownsvilleprimepeps2"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="link-button"
+        >
+
+            <div class="icon">
+                <i class="fa-brands fa-tiktok"></i>
+            </div>
+
+            <div class="link-text">
+
+                <div class="link-title">
+                    TIKTOK
+                </div>
+
+                <div class="link-subtitle">
+                    @brownsvilleprimepeps2
+                </div>
+
+            </div>
+
+            <div class="arrow">
+                <i class="fa-solid fa-chevron-right"></i>
+            </div>
+
+        </a>
+
+
+        <!-- INSTAGRAM -->
+
+        <a
+            href="https://www.instagram.com/brownsville_primepeps/"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="link-button"
+        >
+
+            <div class="icon">
+                <i class="fa-brands fa-instagram"></i>
+            </div>
+
+            <div class="link-text">
+
+                <div class="link-title">
+                    INSTAGRAM
+                </div>
+
+                <div class="link-subtitle">
+                    @brownsville_primepeps
+                </div>
+
+            </div>
+
+            <div class="arrow">
+                <i class="fa-solid fa-chevron-right"></i>
+            </div>
+
+        </a>
+
+
+        <!-- EMAIL -->
+
+        <a
+            href="mailto:brownsvilleprimepeps@gmail.com"
+            class="link-button"
+        >
+
+            <div class="icon">
+                <i class="fa-solid fa-envelope"></i>
+            </div>
+
+            <div class="link-text">
+
+                <div class="link-title">
+                    EMAIL US
+                </div>
+
+                <div class="link-subtitle">
+                    brownsvilleprimepeps@gmail.com
+                </div>
+
+            </div>
+
+            <div class="arrow">
+                <i class="fa-solid fa-chevron-right"></i>
+            </div>
+
+        </a>
+
+    </div>
+
+
+    <!-- SOCIAL ICONS -->
+
+    <div class="divider">
+        FIND US ONLINE
+    </div>
+
+
+    <div class="socials">
+
+        <!-- WhatsApp -->
+
+        <a
+            href="https://chat.whatsapp.com/Gmm4ikN9Aw730Y8X8mY9Ee"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="social"
+            aria-label="WhatsApp"
+        >
+            <i class="fa-brands fa-whatsapp"></i>
+        </a>
+
+
+        <!-- TikTok -->
+
+        <a
+            href="https://www.tiktok.com/@brownsvilleprimepeps2"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="social"
+            aria-label="TikTok"
+        >
+            <i class="fa-brands fa-tiktok"></i>
+        </a>
+
+
+        <!-- Instagram -->
+
+        <a
+            href="https://www.instagram.com/brownsville_primepeps/"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="social"
+            aria-label="Instagram"
+        >
+            <i class="fa-brands fa-instagram"></i>
+        </a>
+
+
+        <!-- Email -->
+
+        <a
+            href="mailto:brownsvilleprimepeps@gmail.com"
+            class="social"
+            aria-label="Email"
+        >
+            <i class="fa-solid fa-envelope"></i>
+        </a>
+
+    </div>
+
+
+    <!-- FOOTER -->
+
+    <div class="footer">
+
+        <strong>Brownsville Prime Peps</strong>
+
+        <br>
+
+        Research purposes only.
+
+        <br>
+
+        Not for human consumption.
+
+        <br><br>
+
+        © 2026 Brownsville Prime Peps
+
+    </div>
+
+</div>
+
+
+<!-- INVENTORY POPUP -->
+
+<div
+    id="inventoryModal"
+    class="modal"
+    onclick="closeInventory(event)"
+>
+
+    <div class="modal-content">
+
+        <button
+            class="close"
+            onclick="closeInventory()"
+            aria-label="Close"
+        >
+            ×
+        </button>
+
+        <img
+            src="inventory.png"
+            alt="Current Inventory and Pricing"
+            class="inventory-image"
+        >
+
+    </div>
+
+</div>
+
+
+<script>
+
+    function openInventory() {
+
+        document
+            .getElementById("inventoryModal")
+            .classList.add("active");
+
+        document.body.style.overflow = "hidden";
+
+    }
+
+
+    function closeInventory(event) {
+
+        if (
+            !event ||
+            event.target.id === "inventoryModal"
+        ) {
+
+            document
+                .getElementById("inventoryModal")
+                .classList.remove("active");
+
+            document.body.style.overflow = "";
+
+        }
+
+    }
+
+
+    document.addEventListener(
+        "keydown",
+        function(event) {
+
+            if (event.key === "Escape") {
+
+                document
+                    .getElementById("inventoryModal")
+                    .classList.remove("active");
+
+                document.body.style.overflow = "";
+
+            }
+
+        }
+    );
+
+</script>
+
+</body>
+</html>
+```
