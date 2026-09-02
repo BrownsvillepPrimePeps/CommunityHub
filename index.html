@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -36,6 +35,11 @@
 
             overflow-x: hidden;
         }
+        
+        /* Utility class to lock scrolling when modals are open */
+        .no-scroll {
+            overflow: hidden !important;
+        }
 
         body::before {
             content: "";
@@ -61,7 +65,147 @@
             z-index: 2;
         }
 
-        /* LOGO */
+        /* --- VERIFICATION OVERLAY --- */
+        
+        .verification-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(5, 3, 10, 0.98);
+            z-index: 99999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+        }
+
+        .verification-box {
+            background: #160a22;
+            border: 1px solid rgba(168,85,247,.4);
+            border-radius: 18px;
+            padding: 35px 25px;
+            max-width: 550px;
+            width: 100%;
+            box-shadow: 0 0 50px rgba(168,85,247,.15);
+            text-align: left;
+            position: relative;
+        }
+
+        .verification-title {
+            color: #a855f7;
+            font-size: 22px;
+            font-weight: 900;
+            margin-bottom: 15px;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            text-align: center;
+        }
+
+        .verification-text {
+            color: #b8afc5;
+            font-size: 13px;
+            line-height: 1.6;
+            margin-bottom: 25px;
+        }
+
+        .verification-text strong {
+            color: #d8b4fe;
+            font-weight: bold;
+        }
+        
+        .verification-text ul {
+            margin-top: 10px;
+            margin-bottom: 10px;
+            padding-left: 20px;
+            color: #ff6b6b;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #d8b4fe;
+            font-size: 12px;
+            font-weight: bold;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .form-group input[type="text"] {
+            width: 100%;
+            padding: 14px 15px;
+            border-radius: 10px;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(168,85,247,.3);
+            color: white;
+            font-size: 15px;
+            outline: none;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+
+        .form-group input[type="text"]:focus {
+            border-color: #a855f7;
+            box-shadow: 0 0 10px rgba(168,85,247,.2);
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            margin-bottom: 25px;
+        }
+
+        .checkbox-group input[type="checkbox"] {
+            margin-top: 4px;
+            width: 18px;
+            height: 18px;
+            accent-color: #a855f7;
+            cursor: pointer;
+            flex-shrink: 0;
+        }
+
+        .checkbox-group label {
+            color: #b8afc5;
+            font-size: 13px;
+            line-height: 1.5;
+            cursor: pointer;
+        }
+
+        .enter-btn {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(135deg, #a855f7, #6d28d9);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 900;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s, filter 0.2s;
+        }
+
+        .enter-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(168,85,247,.4);
+            filter: brightness(1.1);
+        }
+
+        .error-message {
+            color: #ff6b6b;
+            font-size: 13px;
+            margin-top: 15px;
+            text-align: center;
+            font-weight: bold;
+            display: none;
+        }
+
+        /* --- LOGO --- */
 
         .logo-wrapper {
             width: 130px;
@@ -91,7 +235,7 @@
             display: block;
         }
 
-        /* BRAND */
+        /* --- BRAND --- */
 
         .brand {
             text-align: center;
@@ -142,7 +286,7 @@
             font-size: 15px;
         }
 
-        /* LINKS */
+        /* --- LINKS --- */
 
         .links {
             display: flex;
@@ -252,7 +396,7 @@
             padding-left: 10px;
         }
 
-        /* FEATURED BUTTONS */
+        /* --- FEATURED BUTTONS --- */
 
         .inventory {
             border-color: rgba(192,132,252,.8);
@@ -281,7 +425,7 @@
             border-color: rgba(168,85,247,.7);
         }
 
-        /* DIVIDER */
+        /* --- DIVIDER --- */
 
         .divider {
             display: flex;
@@ -309,7 +453,7 @@
             );
         }
 
-        /* SOCIALS */
+        /* --- SOCIALS --- */
 
         .socials {
             display: flex;
@@ -350,7 +494,7 @@
             font-size: 20px;
         }
 
-        /* FOOTER */
+        /* --- FOOTER --- */
 
         .footer {
             text-align: center;
@@ -365,7 +509,7 @@
             color: #a895b8;
         }
 
-        /* INVENTORY MODAL */
+        /* --- INVENTORY MODAL --- */
 
         .modal {
             position: fixed;
@@ -382,6 +526,7 @@
             z-index: 9999;
 
             backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
         }
 
         .modal.active {
@@ -434,464 +579,282 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            transition: 0.2s;
+        }
+        
+        .close:hover {
+            background: #a855f7;
+            transform: scale(1.1);
         }
 
         @keyframes zoomIn {
-
             from {
                 opacity: 0;
                 transform: scale(.92);
             }
-
             to {
                 opacity: 1;
                 transform: scale(1);
             }
-
         }
 
-        /* MOBILE */
+        /* --- MOBILE --- */
 
         @media (max-width: 500px) {
-
             .container {
                 padding: 35px 15px 25px;
             }
-
             .logo-wrapper {
                 width: 105px;
                 height: 105px;
             }
-
             .link-button {
                 min-height: 70px;
             }
-
             .icon {
                 width: 45px;
                 height: 45px;
             }
-
             .link-title {
                 font-size: 14px;
             }
-
             .link-subtitle {
                 font-size: 12px;
             }
-
             .brand h1 {
                 font-size: 29px;
             }
-
             .brand h2 {
                 font-size: 25px;
             }
-
             .tagline {
                 font-size: 10px;
                 letter-spacing: 3px;
             }
-
+            .verification-box {
+                padding: 25px 20px;
+            }
+            .verification-title {
+                font-size: 18px;
+            }
         }
 
     </style>
 </head>
 
-<body>
+<!-- Body receives the no-scroll class by default so the user can't bypass the age gate -->
+<body class="no-scroll">
+
+<!-- VERIFICATION & DISCLAIMER OVERLAY -->
+<div id="verificationGate" class="verification-overlay">
+    <div class="verification-box">
+        <div class="verification-title">Access Restricted</div>
+        
+        <div class="verification-text">
+            <p>Welcome to <strong>Brownsville Prime Peps</strong>. Before entering, you must read, understand, and agree to the following terms:</p>
+            <ul>
+                <li>You are <strong>21 years of age or older</strong>.</li>
+                <li>All information, materials, and products provided are strictly <strong>FOR RESEARCH PURPOSES ONLY</strong>.</li>
+                <li>Absolutely <strong>NOT FOR HUMAN CONSUMPTION</strong> or human use whatsoever.</li>
+            </ul>
+            <p>By proceeding, you acknowledge that you are a qualified researcher and assume full responsibility for the use of any information or products provided.</p>
+        </div>
+
+        <div class="form-group">
+            <label for="signatureName">Electronic Signature (Full Name)</label>
+            <input type="text" id="signatureName" placeholder="Type your name to sign" autocomplete="off">
+        </div>
+
+        <div class="checkbox-group">
+            <input type="checkbox" id="agreementCheck">
+            <label for="agreementCheck">I verify that I am over 21 years of age, and I agree that all content and products are for research use only and not for human consumption.</label>
+        </div>
+
+        <button class="enter-btn" onclick="verifyAndEnter()">I Agree & Enter</button>
+        
+        <div id="verifyError" class="error-message">
+            Please provide your digital signature and check the agreement box to enter.
+        </div>
+    </div>
+</div>
+<!-- END OVERLAY -->
 
 <div class="container">
 
     <!-- LOGO -->
-
     <div class="logo-wrapper">
-
-        <img
-            src="logo.png"
-            alt="Brownsville Prime Peps Logo"
-            class="logo"
-        >
-
+        <img src="logo.png" alt="Brownsville Prime Peps Logo" class="logo">
     </div>
 
-
     <!-- BRAND -->
-
     <div class="brand">
-
         <h1>BROWNSVILLE</h1>
-
         <h2>PRIME PEPS</h2>
-
         <div class="tagline">
             QUALITY • PURITY • RESULTS
         </div>
-
         <p class="description">
             Stay connected with Brownsville Prime Peps.
             Get the latest updates on inventory, pricing,
             announcements and our community.
         </p>
-
     </div>
-
 
     <!-- MAIN LINKS -->
-
     <div class="links">
 
-
         <!-- WHATSAPP -->
-
-        <a
-            href="https://chat.whatsapp.com/H4O4rqokN8pEfNY8iLfHb0"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="link-button"
-        >
-
-            <div class="icon">
-                <i class="fa-brands fa-whatsapp"></i>
-            </div>
-
+        <a href="https://chat.whatsapp.com/H4O4rqokN8pEfNY8iLfHb0" target="_blank" rel="noopener noreferrer" class="link-button">
+            <div class="icon"><i class="fa-brands fa-whatsapp"></i></div>
             <div class="link-text">
-
-                <div class="link-title">
-                    JOIN OUR WHATSAPP COMMUNITY
-                </div>
-
-                <div class="link-subtitle">
-                    Stock updates, announcements & community
-                </div>
-
+                <div class="link-title">JOIN OUR WHATSAPP COMMUNITY</div>
+                <div class="link-subtitle">Stock updates, announcements & community</div>
             </div>
-
-            <div class="arrow">
-                <i class="fa-solid fa-chevron-right"></i>
-            </div>
-
+            <div class="arrow"><i class="fa-solid fa-chevron-right"></i></div>
         </a>
-
 
         <!-- INVENTORY -->
-
-        <button
-            class="link-button inventory"
-            onclick="openInventory()"
-        >
-
-            <div class="icon">
-                <i class="fa-solid fa-box-open"></i>
-            </div>
-
+        <button class="link-button inventory" onclick="openInventory()">
+            <div class="icon"><i class="fa-solid fa-box-open"></i></div>
             <div class="link-text">
-
-                <div class="link-title">
-                    CURRENT INVENTORY & PRICING
-                </div>
-
-                <div class="link-subtitle">
-                    View current stock & pricing
-                </div>
-
+                <div class="link-title">CURRENT INVENTORY & PRICING</div>
+                <div class="link-subtitle">View current stock & pricing</div>
             </div>
-
-            <div class="arrow">
-                <i class="fa-solid fa-chevron-right"></i>
-            </div>
-
+            <div class="arrow"><i class="fa-solid fa-chevron-right"></i></div>
         </button>
 
-
         <!-- PEPTIDE CALCULATOR -->
-
-        <a
-            href="https://brownsvillepprimepeps.github.io/BPPCalculator/"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="link-button calculator"
-        >
-
-            <div class="icon">
-                <i class="fa-solid fa-calculator"></i>
-            </div>
-
+        <a href="https://brownsvillepprimepeps.github.io/BPPCalculator/" target="_blank" rel="noopener noreferrer" class="link-button calculator">
+            <div class="icon"><i class="fa-solid fa-calculator"></i></div>
             <div class="link-text">
-
-                <div class="link-title">
-                    PEPTIDE CALCULATOR
-                </div>
-
-                <div class="link-subtitle">
-                    Reconstitution & dosage calculator
-                </div>
-
+                <div class="link-title">PEPTIDE CALCULATOR</div>
+                <div class="link-subtitle">Reconstitution & dosage calculator</div>
             </div>
-
-            <div class="arrow">
-                <i class="fa-solid fa-chevron-right"></i>
-            </div>
-
+            <div class="arrow"><i class="fa-solid fa-chevron-right"></i></div>
         </a>
-
 
         <!-- TIKTOK -->
-
-        <a
-            href="https://www.tiktok.com/@brownsvilleprimepeps2"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="link-button"
-        >
-
-            <div class="icon">
-                <i class="fa-brands fa-tiktok"></i>
-            </div>
-
+        <a href="https://www.tiktok.com/@brownsvilleprimepeps2" target="_blank" rel="noopener noreferrer" class="link-button">
+            <div class="icon"><i class="fa-brands fa-tiktok"></i></div>
             <div class="link-text">
-
-                <div class="link-title">
-                    TIKTOK
-                </div>
-
-                <div class="link-subtitle">
-                    @brownsvilleprimepeps2
-                </div>
-
+                <div class="link-title">TIKTOK</div>
+                <div class="link-subtitle">@brownsvilleprimepeps2</div>
             </div>
-
-            <div class="arrow">
-                <i class="fa-solid fa-chevron-right"></i>
-            </div>
-
+            <div class="arrow"><i class="fa-solid fa-chevron-right"></i></div>
         </a>
-
 
         <!-- INSTAGRAM -->
-
-        <a
-            href="https://www.instagram.com/brownsville_primepeps/"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="link-button"
-        >
-
-            <div class="icon">
-                <i class="fa-brands fa-instagram"></i>
-            </div>
-
+        <a href="https://www.instagram.com/brownsville_primepeps/" target="_blank" rel="noopener noreferrer" class="link-button">
+            <div class="icon"><i class="fa-brands fa-instagram"></i></div>
             <div class="link-text">
-
-                <div class="link-title">
-                    INSTAGRAM
-                </div>
-
-                <div class="link-subtitle">
-                    @brownsville_primepeps
-                </div>
-
+                <div class="link-title">INSTAGRAM</div>
+                <div class="link-subtitle">@brownsville_primepeps</div>
             </div>
-
-            <div class="arrow">
-                <i class="fa-solid fa-chevron-right"></i>
-            </div>
-
+            <div class="arrow"><i class="fa-solid fa-chevron-right"></i></div>
         </a>
 
-
         <!-- EMAIL -->
-
-        <a
-            href="mailto:brownsvilleprimepeps@gmail.com"
-            class="link-button"
-        >
-
-            <div class="icon">
-                <i class="fa-solid fa-envelope"></i>
-            </div>
-
+        <a href="mailto:brownsvilleprimepeps@gmail.com" class="link-button">
+            <div class="icon"><i class="fa-solid fa-envelope"></i></div>
             <div class="link-text">
-
-                <div class="link-title">
-                    EMAIL US
-                </div>
-
-                <div class="link-subtitle">
-                    brownsvilleprimepeps@gmail.com
-                </div>
-
+                <div class="link-title">EMAIL US</div>
+                <div class="link-subtitle">brownsvilleprimepeps@gmail.com</div>
             </div>
-
-            <div class="arrow">
-                <i class="fa-solid fa-chevron-right"></i>
-            </div>
-
+            <div class="arrow"><i class="fa-solid fa-chevron-right"></i></div>
         </a>
 
     </div>
 
-
     <!-- SOCIAL ICONS -->
-
     <div class="divider">
         FIND US ONLINE
     </div>
 
-
     <div class="socials">
-
         <!-- WhatsApp -->
-
-        <a
-            href="https://chat.whatsapp.com/Gmm4ikN9Aw730Y8X8mY9Ee"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="social"
-            aria-label="WhatsApp"
-        >
+        <a href="https://chat.whatsapp.com/Gmm4ikN9Aw730Y8X8mY9Ee" target="_blank" rel="noopener noreferrer" class="social" aria-label="WhatsApp">
             <i class="fa-brands fa-whatsapp"></i>
         </a>
-
-
         <!-- TikTok -->
-
-        <a
-            href="https://www.tiktok.com/@brownsvilleprimepeps2"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="social"
-            aria-label="TikTok"
-        >
+        <a href="https://www.tiktok.com/@brownsvilleprimepeps2" target="_blank" rel="noopener noreferrer" class="social" aria-label="TikTok">
             <i class="fa-brands fa-tiktok"></i>
         </a>
-
-
         <!-- Instagram -->
-
-        <a
-            href="https://www.instagram.com/brownsville_primepeps/"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="social"
-            aria-label="Instagram"
-        >
+        <a href="https://www.instagram.com/brownsville_primepeps/" target="_blank" rel="noopener noreferrer" class="social" aria-label="Instagram">
             <i class="fa-brands fa-instagram"></i>
         </a>
-
-
         <!-- Email -->
-
-        <a
-            href="mailto:brownsvilleprimepeps@gmail.com"
-            class="social"
-            aria-label="Email"
-        >
+        <a href="mailto:brownsvilleprimepeps@gmail.com" class="social" aria-label="Email">
             <i class="fa-solid fa-envelope"></i>
         </a>
-
     </div>
-
 
     <!-- FOOTER -->
-
     <div class="footer">
-
         <strong>Brownsville Prime Peps</strong>
-
         <br>
-
         Research purposes only.
-
         <br>
-
         Not for human consumption.
-
         <br><br>
-
         © 2026 Brownsville Prime Peps
-
     </div>
 
 </div>
-
 
 <!-- INVENTORY POPUP -->
-
-<div
-    id="inventoryModal"
-    class="modal"
-    onclick="closeInventory(event)"
->
-
+<div id="inventoryModal" class="modal" onclick="closeInventory(event)">
     <div class="modal-content">
-
-        <button
-            class="close"
-            onclick="closeInventory()"
-            aria-label="Close"
-        >
-            ×
-        </button>
-
-        <img
-            src="inventory.png"
-            alt="Current Inventory and Pricing"
-            class="inventory-image"
-        >
-
+        <button class="close" onclick="closeInventory()" aria-label="Close">×</button>
+        <img src="inventory.png" alt="Current Inventory and Pricing" class="inventory-image">
     </div>
-
 </div>
 
-
 <script>
+    // --- VERIFICATION GATE SCRIPT ---
+    function verifyAndEnter() {
+        const signature = document.getElementById("signatureName").value.trim();
+        const agreement = document.getElementById("agreementCheck").checked;
+        const errorBox = document.getElementById("verifyError");
 
-    function openInventory() {
-
-        document
-            .getElementById("inventoryModal")
-            .classList.add("active");
-
-        document.body.style.overflow = "hidden";
-
+        if (signature === "" || !agreement) {
+            // Show error if fields are incomplete
+            errorBox.style.display = "block";
+        } else {
+            // Hide error and overlay, restore page scrolling
+            errorBox.style.display = "none";
+            document.getElementById("verificationGate").style.display = "none";
+            document.body.classList.remove("no-scroll");
+        }
     }
 
+    // --- INVENTORY MODAL SCRIPT ---
+    function openInventory() {
+        document.getElementById("inventoryModal").classList.add("active");
+        document.body.classList.add("no-scroll");
+    }
 
     function closeInventory(event) {
-
-        if (
-            !event ||
-            event.target.id === "inventoryModal"
-        ) {
-
-            document
-                .getElementById("inventoryModal")
-                .classList.remove("active");
-
-            document.body.style.overflow = "";
-
+        if (!event || event.target.id === "inventoryModal") {
+            document.getElementById("inventoryModal").classList.remove("active");
+            // Only remove no-scroll if the verification gate is also closed
+            if (document.getElementById("verificationGate").style.display === "none") {
+                document.body.classList.remove("no-scroll");
+            }
         }
-
     }
 
-
-    document.addEventListener(
-        "keydown",
-        function(event) {
-
-            if (event.key === "Escape") {
-
-                document
-                    .getElementById("inventoryModal")
-                    .classList.remove("active");
-
-                document.body.style.overflow = "";
-
+    document.addEventListener("keydown", function(event) {
+        if (event.key === "Escape") {
+            const inventoryModal = document.getElementById("inventoryModal");
+            if (inventoryModal.classList.contains("active")) {
+                inventoryModal.classList.remove("active");
+                if (document.getElementById("verificationGate").style.display === "none") {
+                    document.body.classList.remove("no-scroll");
+                }
             }
-
         }
-    );
-
+    });
 </script>
 
 </body>
