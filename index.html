@@ -598,6 +598,48 @@
             }
         }
 
+
+        /* --- WHATSAPP QR MODAL --- */
+
+        .qr-modal-content {
+            width: min(92vw, 430px);
+            background: #160a22;
+            border: 1px solid rgba(168,85,247,.45);
+            border-radius: 18px;
+            padding: 35px 25px;
+            text-align: center;
+            box-shadow: 0 0 50px rgba(168,85,247,.25);
+        }
+
+        .qr-box h3 {
+            color: #d8b4fe;
+            font-size: 18px;
+            font-weight: 900;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+
+        .qr-box p {
+            color: #a9a0b7;
+            font-size: 13px;
+            margin-bottom: 20px;
+        }
+
+        .whatsapp-qr {
+            display: block;
+            width: min(100%, 320px);
+            aspect-ratio: 1 / 1;
+            object-fit: contain;
+            margin: 0 auto;
+            background: white;
+            padding: 12px;
+            border-radius: 12px;
+        }
+
+        .qr-modal-content .close {
+            top: -45px;
+        }
+
         /* --- MOBILE --- */
 
         @media (max-width: 500px) {
@@ -704,14 +746,14 @@
     <div class="links">
 
         <!-- WHATSAPP -->
-        <a href="https://chat.whatsapp.com/H4O4rqokN8pEfNY8iLfHb0" target="_blank" rel="noopener noreferrer" class="link-button">
+        <button class="link-button" onclick="openWhatsAppQR()">
             <div class="icon"><i class="fa-brands fa-whatsapp"></i></div>
             <div class="link-text">
                 <div class="link-title">JOIN OUR WHATSAPP COMMUNITY</div>
-                <div class="link-subtitle">Stock updates, announcements & community</div>
+                <div class="link-subtitle">Scan the QR code to join</div>
             </div>
             <div class="arrow"><i class="fa-solid fa-chevron-right"></i></div>
-        </a>
+        </button>
 
         <!-- INVENTORY -->
         <button class="link-button inventory" onclick="openInventory()">
@@ -772,9 +814,9 @@
 
     <div class="socials">
         <!-- WhatsApp -->
-        <a href="https://chat.whatsapp.com/Gmm4ikN9Aw730Y8X8mY9Ee" target="_blank" rel="noopener noreferrer" class="social" aria-label="WhatsApp">
+        <button type="button" class="social" onclick="openWhatsAppQR()" aria-label="WhatsApp">
             <i class="fa-brands fa-whatsapp"></i>
-        </a>
+        </button>
         <!-- TikTok -->
         <a href="https://www.tiktok.com/@brownsvilleprimepeps2" target="_blank" rel="noopener noreferrer" class="social" aria-label="TikTok">
             <i class="fa-brands fa-tiktok"></i>
@@ -807,6 +849,18 @@
     <div class="modal-content">
         <button class="close" onclick="closeInventory()" aria-label="Close">×</button>
         <img src="inventory.png" alt="Current Inventory and Pricing" class="inventory-image">
+    </div>
+</div>
+
+<!-- WHATSAPP QR POPUP -->
+<div id="whatsappQRModal" class="modal" onclick="closeWhatsAppQR(event)">
+    <div class="modal-content qr-modal-content">
+        <button class="close" onclick="closeWhatsAppQR()" aria-label="Close">×</button>
+        <div class="qr-box">
+            <h3>JOIN OUR WHATSAPP COMMUNITY</h3>
+            <p>Scan the QR code with your phone to join.</p>
+            <img src="whatsapp-qr.png" alt="WhatsApp Community QR Code" class="whatsapp-qr">
+        </div>
     </div>
 </div>
 
@@ -844,14 +898,41 @@
         }
     }
 
+
+    // --- WHATSAPP QR MODAL SCRIPT ---
+    function openWhatsAppQR() {
+        document.getElementById("whatsappQRModal").classList.add("active");
+        document.body.classList.add("no-scroll");
+    }
+
+    function closeWhatsAppQR(event) {
+        if (!event || event.target.id === "whatsappQRModal") {
+            document.getElementById("whatsappQRModal").classList.remove("active");
+
+            if (document.getElementById("verificationGate").style.display === "none" &&
+                !document.getElementById("inventoryModal").classList.contains("active")) {
+                document.body.classList.remove("no-scroll");
+            }
+        }
+    }
+
     document.addEventListener("keydown", function(event) {
         if (event.key === "Escape") {
             const inventoryModal = document.getElementById("inventoryModal");
+            const whatsappQRModal = document.getElementById("whatsappQRModal");
+
             if (inventoryModal.classList.contains("active")) {
                 inventoryModal.classList.remove("active");
-                if (document.getElementById("verificationGate").style.display === "none") {
-                    document.body.classList.remove("no-scroll");
-                }
+            }
+
+            if (whatsappQRModal.classList.contains("active")) {
+                whatsappQRModal.classList.remove("active");
+            }
+
+            if (document.getElementById("verificationGate").style.display === "none" &&
+                !inventoryModal.classList.contains("active") &&
+                !whatsappQRModal.classList.contains("active")) {
+                document.body.classList.remove("no-scroll");
             }
         }
     });
